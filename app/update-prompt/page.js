@@ -11,8 +11,12 @@ const UpdatePrompt = () => {
         tag: ""
     });
     const router = useRouter();
-    const promptId = useSearchParams().get("id");
 
+    const promptId = (
+        <Suspense fallback={null}>
+            {useSearchParams().get("id")}
+        </Suspense>
+    );
 
     useEffect(() => {
         const getPrompt = async () => {
@@ -53,7 +57,7 @@ const UpdatePrompt = () => {
 
 
     return (
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
             <Form
                 type="Edit"
                 post={post}
